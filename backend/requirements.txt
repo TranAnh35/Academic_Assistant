@@ -1,4 +1,11 @@
 google-adk
-request
+requests
 beautifulsoup4
 PyPDF2
+sqlalchemy
+pydantic
+pytest
+scholarly
+fastapi
+uvicorn
+python-multipart
