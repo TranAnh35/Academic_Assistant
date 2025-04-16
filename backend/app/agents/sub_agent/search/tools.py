@@ -1,34 +1,11 @@
 import logging
 import asyncio
 from typing import List
-from scholarly import scholarly, ProxyGenerator
+from scholarly import scholarly
 
 from models.document import Document
 
 logger = logging.getLogger(__name__)
-
-def _setup_scholarly():
-    """Setup scholarly with proxy to avoid blocking"""
-    try:
-        pg = ProxyGenerator()
-        # FreeProxies might raise exceptions if it fails to find proxies
-        pg.FreeProxies() 
-        logger.info("Attempting to set scholarly proxy...")
-        # The warning originates from this call potentially due to internal httpx client init issues
-        scholarly.use_proxy(pg)
-        logger.info("Scholarly proxy setup completed (check logs for warnings).")
-    except TypeError as e:
-        # Catch the specific TypeError related to the warning
-        if "__init__" in str(e) and "proxies" in str(e):
-            logger.warning(f"Handled known proxy setup issue: {e}. Scholarly might still function.")
-        else:
-            # Re-raise unexpected TypeErrors
-            logger.error(f"Unexpected TypeError during proxy setup: {e}")
-            raise e
-    except Exception as e:
-        # Catch other potential exceptions during setup
-        logger.error(f"Failed to setup proxy due to an unexpected error: {e}")
-        # Decide if failure to set proxy should halt execution or just be logged
 
 async def search(query: str, number: int = 10) -> List[Document]:
     """
@@ -39,8 +16,6 @@ async def search(query: str, number: int = 10) -> List[Document]:
     Returns:
         List[Document]: A list of documents containing the search results
     """
-    
-    
     
     if not query or not isinstance(query, str):
         raise ValueError("Query must be a non-empty string")
