@@ -1,5 +1,5 @@
 from google.adk.agents import Agent
-from .tools import search
+from services.scholar import search
 from .prompts import return_instructions_search
 
 SearchAgent = Agent(
