@@ -23,8 +23,6 @@ else:
 _default_logs_dir_path = BACKEND_DIR.joinpath("logs").resolve()
 _default_logs_dir_str = str(_default_logs_dir_path)
 
-print(f"Default logs directory string: {_default_logs_dir_str}")
-
 class Settings(BaseSettings):
     APP_NAME: str = os.getenv("APP_NAME", "GeminiAcademicAssistant")
     
@@ -43,5 +41,4 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-print(f"LOGS_DIR: {settings.LOGS_DIR}")
 logger.info(f"Using LOGS_DIR: {settings.LOGS_DIR}")
