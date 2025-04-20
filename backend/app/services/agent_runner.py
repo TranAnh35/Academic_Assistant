@@ -62,15 +62,10 @@ async def run_agent_http(prompt: str, session_id: str, agent_name: str) -> str |
                 else:
                     logger.warning(f"Final response event received but content/parts are missing (Session: {session_id}).")
                 break
-            elif event.error:
-                 logger.error(f"Agent run error event: {event.error} (Session: {session_id})")
-            else:
-                logger.debug(f"Received intermediate event: {type(event)} (Session: {session_id})")
-
 
         if final_response_text is None:
             logger.error(f"No final response received from agent '{agent_name}' (Session: {session_id}).")
-            return None
+            final_response_text = "Agent did not produce a final response."
 
         return final_response_text
 

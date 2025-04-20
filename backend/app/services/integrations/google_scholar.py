@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 #      logger.error(f"Error setting up proxy for scholarly: {e}")
 
 
-async def search(query: str, number: int = 10) -> List[Document]:
+async def search_scholarly(query: str, number: int = 5) -> List[Document]:
     """
     Search for papers on Google Scholar based on the given query.
     Args:
@@ -104,6 +104,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     query = "Gemini 2.0 Flash"
     number = 5
-    results = asyncio.run(search(query, number)) 
+    results = asyncio.run(search_scholarly(query, number)) 
     for doc in results:
         print(f"Title: {doc.title}, Authors: {doc.authors}, Year: {doc.year}, Abstract: {doc.abstract}, URL: {doc.url}")
