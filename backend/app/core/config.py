@@ -2,6 +2,7 @@
 import os
 import dotenv
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 import logging
 import pathlib
 from typing import Optional
@@ -34,10 +35,12 @@ class Settings(BaseSettings):
     PORT: int = int(os.getenv("PORT", 8000))
     HOST: str = os.getenv("HOST", "0.0.0.0")
 
-    class Config:
-        env_file_encoding = 'utf-8'
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(
+        env_file=dotenv_path,
+        env_file_encoding='utf-8',
+        arbitrary_types_allowed=True,
         extra='ignore'
+    )
 
 settings = Settings()
 

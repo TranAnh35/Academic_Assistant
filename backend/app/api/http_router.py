@@ -1,4 +1,4 @@
-# api/v1/http_endpoints.py
+# api/http_router.py
 import logging
 from fastapi import APIRouter, HTTPException, Query
 
