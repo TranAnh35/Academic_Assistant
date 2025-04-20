@@ -83,5 +83,4 @@ async def client_to_agent_messaging(websocket: WebSocket, live_request_queue: Li
         logger.error(f"Unexpected error in client_to_agent_messaging (Session: {session_id}): {e}", exc_info=True)
     finally:
         logger.info(f"Client-to-agent messaging loop finished (Session: {session_id}).")
-        live_request_queue.end_request()
-        
+        await live_request_queue.end_request()

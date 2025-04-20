@@ -1,4 +1,4 @@
-# api/v1/websocket_endpoints.py
+# api/websocket_router.py
 import asyncio
 import logging
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Path, HTTPException
